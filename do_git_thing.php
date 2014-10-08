@@ -14,7 +14,7 @@ function do_merge($firstname, $lastname, $email, $origin="origin", $branch="mast
   do_git("git merge --ff-only $origin/$branch 2>&1");
   try {
     // this one sometimes throws even if nothing needs to be done
-    do_git("git stash pop");
+    do_git("git stash pop 2>&1");
   } catch( Exception $e) {
     if ($e->getMessage() == "No stash found.") {
       // No stash found means that no files were updated, so we don't need to do anything
@@ -31,8 +31,9 @@ function do_git($command)
 {
   $status = 0;
   $output = array();
-  echo $command;
+  echo "\n" . $command;
   exec($command, $output, $status);
+  echo  ": " . $status. "[" . join(",", $output);
   if ($status) {
     throw new Exception(join(",", $output));
   }
