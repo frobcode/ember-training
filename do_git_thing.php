@@ -52,6 +52,7 @@ function do_merge($firstname, $lastname, $email, $origin="origin", $branch="mast
       // No stash found means that no files were updated, so we don't need to do anything
       throw new NoWorkException;
     }
+    var_dump($e);
     throw $e;
   }
   do_git("git add --all :/ 2>&1");
