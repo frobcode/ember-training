@@ -6,7 +6,7 @@ $email = $_POST['email'] ? $_POST['email'] : "atlas@freshbooks.com";
 
 do_merge($firstname, $lastname, $useremail);
 
-function do_merge($firstname, $lastname, $useremail, $origin="origin", $branch="master", $message="Automated content push")
+function do_merge($firstname, $lastname, $email, $origin="origin", $branch="master", $message="Automated content push")
 {
   $authorship = "$firstname $lastname <$email>";
   do_git("git stash save --include-untracked 2>&1");
