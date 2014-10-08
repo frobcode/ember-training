@@ -1,16 +1,13 @@
-<div class="btn-group">
-  {{#link-to 'client.new' classNames="btn btn-success btn-lg"}}Add client{{/link-to}}
-</div>
+{{! client.hbs }}
+<p>{{input type='text' value=query}}</p>
 
-<div class="row">
-  <table class="table table-striped">
-    <tr>
-      <th>Name</th>
-    </tr>
-      {{#each}}
-        <tr>
-          <td>{{#link-to 'client' this}}{{name}}{{/link-to}}</td>
-        </tr>
-      {{/each}}
-  </table>
-</div>
+<table>
+  {{#each client in filteredModel}}
+  <tr>
+    <td>Name: {{link-to client.name 'client' client}}</td>
+    <td>Email: {{client.email}}</td>
+    <td>{{time-tracker}}</td>
+  </tr>
+  {{/each}}
+</table>
+<p><small>{{clientsCount}}</small></p>

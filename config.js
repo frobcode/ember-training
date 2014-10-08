@@ -74,6 +74,6 @@ exports.config = {
 
   server: {
     path: 'server.js',
-    port: 3333
+    port: 3334
   }
 };
