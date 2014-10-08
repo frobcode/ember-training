@@ -48,7 +48,7 @@ function do_merge($firstname, $lastname, $email, $origin="origin", $branch="mast
     // this one sometimes throws even if nothing needs to be done
     do_git("git stash pop 2>&1");
   } catch( Exception $e) {
-    if ($e->getMessage() == "No stash found.") {
+    if (strpos($e->getMessage(),"No stash found.")!==False) {
       // No stash found means that no files were updated, so we don't need to do anything
       throw new NoWorkException;
     }
