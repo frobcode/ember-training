@@ -9,9 +9,9 @@ do_merge($firstname, $lastname, $useremail);
 function do_merge($firstname, $lastname, $useremail, $origin="origin", $branch="master", $message="Automated content push")
 {
   $authorship = "$firstname $lastname <$email>";
-  do_git("git stash save --include-untracked");
-  do_git("git fetch $origin");
-  do_git("git merge --ff-only $origin/$branch");
+  do_git("git stash save --include-untracked 2>&1");
+  do_git("git fetch $origin 2>&1");
+  do_git("git merge --ff-only $origin/$branch 2>&1");
   try {
     // this one sometimes throws even if nothing needs to be done
     do_git("git stash pop");
@@ -22,9 +22,9 @@ function do_merge($firstname, $lastname, $useremail, $origin="origin", $branch="
     }
     throw $e;
   }
-  do_git("git add --all :/");
-  do_git("git commit -m \"$message\" --author=\"$authorship\"");
-  do_git("git push $origin $branch");
+  do_git("git add --all :/ 2>&1");
+  do_git("git commit -m \"$message\" --author=\"$authorship\" 2>&1");
+  do_git("git push $origin $branch 2>&1");
 }
 
 function do_git($command)
