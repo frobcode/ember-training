@@ -11,6 +11,7 @@ $email = $_POST['email'] ? $_POST['email'] : "atlas@freshbooks.com";
 $response = handle_web_based_merging();
 
 echo $response;
+
 function handle_web_based_merging()
 {
   // this is called by the web page to format up the output suitably.
@@ -53,10 +54,8 @@ function do_git($command)
 {
   $status = 0;
   $output = array();
-  echo "\n" . $command;
   exec($command, $output, $status);
-  echo  ": " . $status. "[" . join(",", $output);
   if ($status) {
-    throw new Exception(join(",", $output));
+    throw new Exception("Error executing command [$command]:  [" . join(",", $output). "]");
   }
 }
