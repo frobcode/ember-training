@@ -8,11 +8,20 @@ $lastname = $_POST['ln'] ? $_POST['ln'] : "Admin";
 $email = $_POST['email'] ? $_POST['email'] : "atlas@freshbooks.com";
 
 
-$response = handle_web_based_merging();
+$response = do_merging();
 
-echo $response;
+echo json_encode($response);
 
-function handle_web_based_merging()
+function web_based_merging()
+{
+  $response = do_merging();
+  json_encode($response);
+  header("Content-type", "application/json");
+
+  echo json_encode($response);
+}
+
+function do_merging()
 {
   // this is called by the web page to format up the output suitably.
   $firstname = $_POST['fn'] ? $_POST['fn'] : "Content";
