@@ -1,0 +1,16 @@
+<div class="btn-group">
+  {{#link-to 'client.new' classNames="btn btn-success btn-lg"}}Add client{{/link-to}}
+</div>
+
+<div class="row">
+  <table class="table table-striped">
+    <tr>
+      <th>Name</th>
+    </tr>
+      {{#each}}
+        <tr>
+          <td>{{#link-to 'client' this}}{{name}}{{/link-to}}</td>
+        </tr>
+      {{/each}}
+  </table>
+</div>

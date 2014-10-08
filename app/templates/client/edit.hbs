@@ -1,0 +1,9 @@
+{{! client/edit.hbs }}
+<h3>{{name}}</h3>
+
+<p>[{{name}}] [{{lname}}]</p>
+<p>{{input type="email" value=email}}</p>
+
+<br />
+<button {{action "save" model}}>Save</button>
+<a href="#" {{action "cancel" model}}>Cancel</a>
