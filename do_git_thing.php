@@ -1,10 +1,32 @@
 <?php
 
+class NoWorkException extends Exception
+{ }
+
 $firstname = $_POST['fn'] ? $_POST['fn'] : "Content";
 $lastname = $_POST['ln'] ? $_POST['ln'] : "Admin";
 $email = $_POST['email'] ? $_POST['email'] : "atlas@freshbooks.com";
 
-do_merge($firstname, $lastname, $useremail);
+
+$response = handle_web_based_merging();
+
+echo $response;
+function handle_web_based_merging()
+{
+  // this is called by the web page to format up the output suitably.
+  $firstname = $_POST['fn'] ? $_POST['fn'] : "Content";
+  $lastname = $_POST['ln'] ? $_POST['ln'] : "Admin";
+  $email = $_POST['email'] ? $_POST['email'] : "atlas@freshbooks.com";
+  try {
+    do_merge($firstname, $lastname, $useremail);
+  } catch(NoWorkException $nwe) {
+    // we don't have anything to do!
+    return array("status"=>"ok", "message"=>"No changes to be committed");
+  } catch(Exception $e) {
+    return array("status"=>"error", "message"=>$e->getMessage());
+  }
+  return array("status"=>"ok", "message"=>"Changes committed");
+}
 
 function do_merge($firstname, $lastname, $email, $origin="origin", $branch="master", $message="Automated content push")
 {
